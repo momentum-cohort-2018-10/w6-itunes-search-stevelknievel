@@ -25,7 +25,8 @@ $.get('https://itunes.apple.com/search?term', { term: query }, function (entity)
 
 function trackHtml(track) {
     return `
-        <a href="${track.trackViewUrl}">${track.trackName}</a> - Album: ${track.collectionName}
+        <a href="${track.trackViewUrl}">${track.trackName}</a> - Album: ${track.collectionName} 
+        <img src="${track.artworkUrl100}">
     `
 }
 
