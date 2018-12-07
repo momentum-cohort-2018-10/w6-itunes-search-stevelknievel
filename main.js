@@ -3,71 +3,38 @@
 const searchButton = document.getElementById('search-button')
 const searchField = document.getElementById('search-field')
 
-searchButton.addEventListener('click', function (event) {
-    $.ajax({
-        url: 'https://itunes.apple.com/search?term',
-        data:{
-            term:searchField.value
-        },
-        dataType: "json",
-        success: function (entity) {
-            console.log(entity)
-            let resultsDiv = document.getElementById('search-results')
-            resultsDiv.innerHTML=''
-            let countP = document.createElement('p')
-            countP.innerText = `Total count: ${entity.resultCount}` 
-            resultsDiv.appendChild(countP)
 
-            for (let track of entity.results) {
-                let trackP = document.createElement('p')
-                let trackLink = document.createElement('a')
-                trackLink.href = track.trackViewUrl
-                trackLink.innerText = track.trackName
-                trackP.appendChild(trackLink)
-                resultsDiv.appendChild(trackP)
-            }
+$('#search-button').on('click', function (entity) {
+    let query = $('#search-field').val()
+
+
+$.get('https://itunes.apple.com/search?term', { term: query }, function (entity) {
+    console.log(entity)
+    let $resultsDiv = $('#search-results')
+    $resultsDiv
+        .empty()
+        .append($('<p>')
+            .text(`Total count: ${entity.resultCount}`)
+        )
+    
+    for (let track of entity.results) {
+        $resultsDiv.append($('<p>').html(trackHtml(track)))
         }
-    })
+    }, 'json')
 })
 
-
-// $.agax({
-    
-
-// })
-
-
+function trackHtml(track) {
+    return `
+        <a href="${track.trackViewUrl}">${track.trackName}</a> - Album: ${track.collectionName}
+    `
+}
 
 
 
-
-// searchButton.addEventListener('click', function(event) {
-//     let query = searchField.value
-//     // let language = searchLanguage.value -- part of clinton's example
-
-//     // language if statement
-    
-//     $.ajax({
-//         url: 'https://itunes-api-proxy.glitch.me',
-//         data: {
-//             q: 
-//             b: 
-//             a: 
-//             s: 
-//         },
-
-//         // you need to look in the specific API documentation for success parameters (jquery.ajax)
-//         success: function (results) {
-//             console.log(results)
-//             awlkfja;sldkjf
-//             a;sdfkj;asdlkfj
-//             a;lsja;sldkfja;sdfkjasd;lfkj
-//             async;lfkja;sldkfja
-
-//         for (let a;sdlkfj of results.items) {
-//             let asd;lfjk = document.createElement('XXXX')
-//             :LKAJDF.innerHTML = repoHtml(a;sdlkfj)
-//             resultsDiv.appendChild(XXX)
-//             }       
-//         }
-//     })
+// ADDITIONAL TO ADD:
+// MUSIC PLAYER
+// TRACK NAME
+// Release year?
+// Description?
+// Album & collection information
+// Artwork
