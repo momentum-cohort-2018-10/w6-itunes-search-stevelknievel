@@ -9,12 +9,23 @@ searchButton.addEventListener('click', function (event) {
         data:{
             term:searchField.value
         },
-        success: function ( entity ){
-           console.log(entity)
-            // let resultsDiv = document.getElementById('search-results')
-            // let countP = document.createElement("p")
-            // countP.innerText = `Result count: ${results.resultCount}` 
-            // resultsDiv.appendChild(countP)
+        dataType: "json",
+        success: function (entity) {
+            console.log(entity)
+            let resultsDiv = document.getElementById('search-results')
+            resultsDiv.innerHTML=''
+            let countP = document.createElement('p')
+            countP.innerText = `Total count: ${entity.resultCount}` 
+            resultsDiv.appendChild(countP)
+
+            for (let track of entity.results) {
+                let trackP = document.createElement('p')
+                let trackLink = document.createElement('a')
+                trackLink.href = track.trackViewUrl
+                trackLink.innerText = track.trackName
+                trackP.appendChild(trackLink)
+                resultsDiv.appendChild(trackP)
+            }
         }
     })
 })
