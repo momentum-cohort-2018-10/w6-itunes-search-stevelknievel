@@ -5,24 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>iTunes Search</title>
-    <link rel="stylesheet" href="main.css">
-    <!-- Clinton's sixty-seven.CSS copies into main.css on this project for fun. Only for development/private use b/c no permission given-->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"> -->
+    <!-- <link rel="stylesheet" href="main.css"> -->
     <script src="jquery-3.3.1.min.js" defer></script>
     <script src="main.js" defer></script>
 </head>
 <body>
     <div>
-
+        <div>
+            <audio id="audio-player" src="" controls="" preload="metadata"></audio>
+            <p>Now Playing:</p>
+        </div>
         <div class="field">
             <div class="control">
-            <input id="search-field" class="input is-info" type="text" placeholder="Find some music..." required>
-            <button id="search-button">Search</button>    
+                <input id="search-field" class="input is-info" type="text" placeholder="Find some music..." required>
+                <button id="search-button">Search</button>    
             </div>
-          </div>
-        <div id="search-results">
-
+            
         </div>
+        <!-- <div class="tile"> -->
+            <div id="search-results">
+            </div>
+        <!-- </div> -->
     </div>
 </body>
 </html>
